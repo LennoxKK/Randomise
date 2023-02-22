@@ -1,0 +1,222 @@
+{% extends 'Cool/base.html' %}
+{% block content %}
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.product .product-small-image img{
+    height: 92px;
+    margin: 10px  0;
+    display: block;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.product .product-small-image img:hover{
+    opacity: 1;
+}
+.product .product-small-image{
+    float: left;
+  
+}
+.product{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
+.product .img-container img{
+    height: 500px;
+}
+.product .img-container{
+    float: right;
+    padding: 10px;
+   
+}
+
+/* LOGIN AND REGISTER FORMS */
+
+.main-div{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(../logos/back-1-.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.6;
+}
+.main-div .form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    padding: 5px;
+    background: #fff;
+    overflow: hidden;
+}
+.main-div .form-box .button-box{
+    width: 220px;
+    position: relative;
+    margin:35px auto;
+    box-shadow: 0 0 20px  9px #ff61241f;
+    border-radius: 30px;
+}
+.main-div .form-box .button-box .toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    font-weight: 1000;
+
+}
+.main-div .form-box .button-box #btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right , #050505,#6cd0e4,#6cd0e4,#6cd0e4, #050505);
+    border-radius: 30px;
+    transition: .5s;
+}
+.main-div .social-icons{
+    margin:30px auto;
+    text-align: center;
+}
+.main-div .social-icons img{
+    width: 30px;
+    margin: 0 12px;
+    box-shadow:0 0 20px 0 #7f7f7f3d;
+    border-radius: 100%;
+    cursor: pointer;
+
+}
+ .input-group{
+    top: 95px;
+    position: absolute;
+    width: 280px;
+    transition:.5s;
+  
+}
+.input-field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom:1px solid  #999 ;
+    outline: none;
+    background: transparent;
+
+}
+ .submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right , #111,#6cd0e4,#6cd0e4,#6cd0e4, #111);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    font-weight:1000;
+}
+.submit-btn a{
+    text-decoration: none;
+    font-weight:1000;
+
+}
+.main-div .form-box .check-box{
+    margin: 30px 10px 30px 0;
+}
+.main-div .form-box .input-group span,label{
+    color: #777;
+    font-size:12px;
+}
+.main-div .form-box #welcome{
+    left: 50px;
+}
+.main-div .form-box #register{
+    left: 450px;
+    font-weight: 1000;
+}
+label{
+    bottom:40px;
+}
+
+@media (max-width: 400px){
+.main-div .form-box {
+    width: calc(90%);
+    height: calc(70%);
+}
+.input-group {
+    width: 191px;
+}
+}
+
+  </style>
+</head>
+<body>
+    <div class="main-div">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                {% if object.id %} 
+                <button type="button" class="toggle-btn" onclick="welcome()">Got It!</button>
+                <button type="button" class="toggle-btn" onclick="register()">Update</button>
+            </div>
+            <form id="welcome" action="" class="input-group">
+                <input type="text"placeholder="This is home away from home!" class="input-field" required readOnly>
+                <input type="text"placeholder="Born Again?" class="input-field" required readOnly>
+                <br><br><br>
+            
+                <button class="submit-btn" type=""><a href="/Cool/" >MCCU HOME</a></button>
+            </form>
+                {% else %}
+
+                <button type="button" class="toggle-btn" onclick="welcome()">Hello !</button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button>
+              
+            </div>
+         
+            <form id="welcome" action="" class="input-group">
+                <input type="text"placeholder="Welcome to our bible study program!" class="input-field" required readOnly>
+                <input type="text"placeholder="Just a few steps to the end." class="input-field" required readOnly>
+                <br><br><br>
+            
+                <button class="submit-btn" type=""><a href="/Cool/" >MCCU HOME</a></button>
+            </form>
+            {% endif %}
+            <form id="register" action="{% url 'Cool:member-create' %} " method="POST" class="input-group">
+                {% csrf_token %}
+                {{form.as_p}}
+                <br>
+                <button class="submit-btn" type="submit">Register</button>
+            </form>
+      
+        </div>
+ 
+    </div>
+
+    <script>
+        let x = document.getElementById("welcome");
+        let y=document.getElementById('register');
+        let z = document.getElementById('btn');
+        const register=()=>{
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+        }
+        function welcome(){
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0px";
+        }
+    </script>
+    
+    {% endblock %}

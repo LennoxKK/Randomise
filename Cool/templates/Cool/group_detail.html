@@ -1,0 +1,346 @@
+
+ {% extends 'Cool/base.html' %}
+ {% block content %}
+        {% comment %}
+         <style>
+            :root{
+                --right:var();
+            }
+            body{
+                background:linear-gradient(to bottom,rgba(169,208,113,0),rgba(136,173,215,1));
+            }
+            .responsive{
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                width:100%;
+                height:100vh;
+            }
+            table{
+                border:1px solid black;
+                background-color:rgb(240, 225, 225);
+                color:rgb(25, 23, 23);
+                margin-left:auto;
+                margin-right:auto;
+            }
+            
+            th,td {
+                border:1px solid black;
+                padding:2px;
+                text-align:center;
+            }
+            table#demo{
+                width:900px;
+                position:relative;
+            } 
+
+            .see-more{
+                width:40px;
+                height: 40px;
+                background:black;
+            }
+
+       
+         
+        </style> {% endcomment %}
+        <style>
+            table {
+              border-collapse: collapse;
+              border-spacing: 0;
+              width: 100%;
+              border: 1px solid #ddd;
+            }
+            
+            th, td {
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even){background-color: #f2f2f2}
+            </style>
+        <div style="overflow-x:auto;">
+            <table>
+      
+            <caption style="color:black"><span>{% if  full %} {{leader }}{% endif%}</span> Bible study {{group_name|upper}} members </caption>
+            <tr> 
+                <th>Year Of Study </th>
+                <th>Gender </th>
+                {%if full == False %}
+                <th id="th-id">Bible Study <strong>leaders</strong>  </th>
+                {% else %}
+                <th> Bs leader</th>
+                {%endif %}
+               
+                <th>id  </th>
+               
+               
+                
+            </tr>
+            {{group_mmbers}}
+           
+                {% for instance in group_members.items %}
+           
+                
+                         {% for k in instance %}
+                         <tr>
+                            <td>{{k.year}}</td>
+                           <td>{{k.gender}}</td>
+                           <td> {% if k.bs_leader == True and not  full %}   <form action="{% url 'Cool:group-detail-view' group_name %}"  method="POST">
+                            {% csrf_token %}
+                            <input  type="checkbox" value="{{k.id}}" name="leader">
+                        </td>
+                         <td><input type="submit" value="Choose" name="bs"></td>   
+                        </form>
+                {%endif %}               
+                         
+                            <td>{{k.id}}</td>
+                              
+                            
+                        
+                        </tr>
+                         {% endfor%}
+             
+               {% endfor%}
+                
+           
+        </table>
+
+    </div>
+    {% endblock %}
+{% comment %}       
+          
+             
+        <div class="responsive">
+            <div class="see-more" id="left" ></div>
+            <div class="cover"> 
+                <table id="demo" >
+                    <caption style="color:black"><span>{% if  full %} {{leader }}{% endif%}</span> Bible study {{group_name|upper}} members </caption>
+                    <tr> 
+                        <th>Year Of Study </th>
+                        <th>Gender </th>
+                        {%if full == False %}
+                        <th id="th-id">Bible Study <strong>leaders</strong>  </th>
+                        {% else %}
+                        <th> Bs leader</th>
+                        {%endif %}
+                       
+                        <th>id  </th>
+                        <th>Year Of Study 2 </th>
+                        <th>Gender 2 </th>
+                        {%if full == False %}
+                        <th id="th-id">Bible Study <strong>leaders </strong>  </th>
+                        {% else %}
+                        <th> Bs leader</th>
+                        {%endif %}
+                       
+                        <th>id  </th>
+                        <th>Gender 2 </th>
+                        {%if full == False %}
+                        <th id="th-id">Bible Study <strong>leaders </strong>  </th>
+                        {% else %}
+                        <th> Bs leader</th>
+                        {%endif %}
+                       
+                        <th>id  </th>
+                        
+                    </tr>
+                    {{group_mmbers}}
+                   
+                        {% for instance in group_members.items %}
+                   
+                        
+                                 {% for k in instance %}
+                                 <tr>
+                                    <td>{{k.year}}</td>
+                                   <td>{{k.gender}}</td>
+                                   <td> {% if k.bs_leader == True and not  full %}   <form action="{% url 'Cool:group-detail-view' group_name %}"  method="POST">
+                                    {% csrf_token %}
+                                    <input  type="checkbox" value="{{k.id}}" name="leader">
+                                </td>
+                                 <td><input type="submit" value="Choose" name="bs"></td>   
+                                </form>
+                        {%endif %}               
+                                 
+                                    <td>{{k.id}}</td>
+                                    <td>{{k.year}}</td>
+                                    <td> {{k.gender}}</td>
+                                    <td> {% if k.bs_leader == True and not  full %}   <form action="{% url 'Cool:group-detail-view' group_name %}"  method="POST">
+                                     {% csrf_token %}
+                                     <input  type="checkbox" value="{{k.id}}" name="leader">
+                                 </td>
+                                  <td><input type="submit" value="Choose" name="bs"></td>   
+                                 </form>
+                         {%endif %}              
+                                  
+                                     <td>{{k.id}}</td>
+                                     <td>{{k.year}}</td>
+                                    <td> {{k.gender}}</td>
+                                    <td> {% if k.bs_leader == True and not  full %}   <form action="{% url 'Cool:group-detail-view' group_name %}"  method="POST">
+                                     {% csrf_token %}
+                                     <input  type="checkbox" value="{{k.id}}" name="leader">
+                                 </td>
+                                  <td><input type="submit" value="Choose" name="bs"></td>   
+                                 </form>
+                         {%endif %}              
+                                    
+                                
+                                </tr>
+                                 {% endfor%}
+                     
+                       {% endfor%}
+                        
+                   
+                </table>
+            </div>
+            <div class="see-more" id="right"></div>
+        </div>
+          
+            <!-- Learning JavaScript  -->
+            
+           <script>
+            let cover = document.querySelector('.cover');
+            let demo = document.querySelector('#demo');
+            let thid=document.getElementById('th-id');
+            let column_width=document.querySelector('td').offsetWidth;
+            let see_more_left = document.getElementById('left');
+            let see_more_right = document.getElementById('right');
+            let height = demo.offsetHeight - thid.offsetTop;
+            let off_left = demo.offsetLeft-8;
+           
+          
+            let all_columns = document.querySelectorAll('th');
+            let screen_size=screen.width;
+            let max_width = 0;
+            let pre_width = 0;
+            let last_width=0;
+            let total_width = 0;
+            current_width = 0;
+            columns=0;
+            let last_columns = 0
+            console.log("left",demo.offsetLeft)
+
+            function get_current_width(start){
+                let count = 2;
+                columns = 0;
+                for(let i =start;i<all_columns.length; i++){
+                    max_width += all_columns[i].offsetWidth;
+                    if(max_width>screen_size-100 || max_width==screen_size){
+                        max_width=pre_width + count*2;
+                        return max_width;
+                        break;
+                    }
+                  //  console.log(all_columns[i].offsetWidth,max_width)
+                    pre_width=max_width;
+                    columns+=1;
+                    count+=1;
+                }   
+            }
+            function get_columns(start){
+                columns = 0;
+                for(let i =start;i<all_columns.length; i++){
+                    max_width += all_columns[i].offsetWidth;
+                    if(max_width>screen_size-100 || max_width==screen_size){
+                        return columns;
+                        break;
+                    }
+                  //  console.log(all_columns[i].offsetWidth,max_width)
+                    columns+=1;
+                }   
+            }
+       
+
+            try{
+                //Get the total width
+                
+                let pad_count = 5;
+                for(let i =0;i<all_columns.length; i++){
+                    total_width += all_columns[i].offsetWidth;
+                    pad_count+=2;
+                }
+                total_width+=pad_count
+                //Get the current width
+                current_width = get_current_width(0);
+    
+                //Get the last viawable width
+                for(let i =all_columns.length-1;i>columns; i--){
+                    last_width += all_columns[i].offsetWidth;
+                    if(last_width>screen_size-100 || last_width==screen_size){
+                        last_width=pre_width;
+                        break;
+                    }
+                  //  console.log(all_columns[i].offsetWidth,max_width)
+                    pre_width=last_width;
+                    last_columns+=1;
+                 }
+            }
+            catch(err){
+                console.log("Error !" + err)
+            }
+            finally{
+               // console.log(columns +" current  ",last_columns +" last","total width "+total_width)
+            }
+
+
+            try{
+                see_more_right.addEventListener('click',()=>{
+                    console.log("leftd",demo.style.left,current_width)
+                  if(demo.offsetLeft<0){
+                        demo.style.right -= current_width;
+                    }
+           
+                 })
+                      
+                see_more_left.addEventListener('click',()=>{
+                    new_width = get_current_width(columns);
+                    if(total_width-current_width > last_width){
+                        console.log("leftd",demo.offsetWidth - current_width,get_columns(0))
+                    demo.style.left =  - current_width;
+                    current_width = new_width;
+                   }
+                  })
+                 }
+            catch(err){
+             console.log("Error! ",err)
+            }
+            finally{
+             console.log(total_width,current_width,last_width)
+            }
+
+
+        
+
+            try{
+
+                if (columns == all_columns.length){
+                let see_more=document.querySelectorAll('.see-more')
+                for(let i=0;i<2;i++){
+                see_more[i].style.display="none";
+                }
+
+            }
+            }
+            catch(err){
+            console.log("Error! "+err)
+            }
+            finally{
+            column_width=current_width;
+            cover.style.cssText="width:"+column_width+"px;height:"+height+"px;position:relative;overflow:hidden;margin-left:auto;margin-right:auto;"
+            }
+
+
+         
+
+            // Automated responsiveness
+
+        
+
+        
+            
+             {% endcomment %}
+            
+            
+      
+            </script> 
+      
+    </body>
+    </html>

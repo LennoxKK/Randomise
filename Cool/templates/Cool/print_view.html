@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCCU</title>
+    <style>
+        .groups{
+            width: 100%;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:relative;
+            flex-wrap: wrap;
+            background:linear-gradient(to right, rgb(53, 52, 52),rgb(139, 131, 131),rgb(139, 131, 131),rgb(139, 131, 131),rgb(72, 69, 69))
+        }
+        .card{
+            width: calc(80%);
+            position:relative;
+            left: calc(10%);
+            height:calc(70%);
+        }
+        .card li{
+            list-style: none;
+            color:#111;
+            font-size: 12px;
+            font-weight: 1000;
+        }
+        .card a{
+            text-decoration: none;
+            color:#111;
+            font-size: 12px;
+            font-weight: 1000;
+           
+        }
+        button{
+            background: transparent;
+            border:none;
+        }
+       .inner{
+        width: calc(60%);
+       
+       }
+       @media(min-width:650px){
+        .card a{
+            font-size: 15px;
+           
+        }
+       }
+    </style>
+</head>
+<body>
+    <div class="groups">
+        {% regroup groups by group_name as bible_study_list %}
+        {% for group_name,data in bible_study_list %}
+        <ul class="card"  id="{{group_name}}">
+                <li class="profile">
+                    <h3><a href="{% url 'Cool:group-detail-view' group_name %}">{{group_name|upper}}</a></h3>
+                </li>
+
+                   <ul class="inner">
+
+                       {% for member in data %}
+                           <li class="inner-row" >
+             
+                   
+                                <span >{{forloop.counter}}. 
+
+                               </span>
+                             <button> <a href="{% url 'Cool:member-detail' member.id|add:250 %}"> <span >{{member.name|upper}}</span> <span>{{"-"}}   {{member.phone}}</span></a></button>
+                           </li>
+                        
+                           <li class="inner-row"> {% if forloop.counter == data|length %} 
+                 
+                            <ul>
+                                   <div class="content">
+                                       <p> <span>
+                                           Gender-ratio  
+                                       </span>  {{member.gender_ratio}}</p>
+                                        <p> <span>Class Ratio</span> {{member.class_ratio}}</p>
+                                       </div>
+                            </ul>
+                           {% endif  %} </li>
+                {% endfor%}
+                    
+                       </ul>
+               
+                    </ul>
+               {% endfor %}
+    </div>
+</body>
+</html>

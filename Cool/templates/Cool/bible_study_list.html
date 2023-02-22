@@ -1,0 +1,599 @@
+ {% extends 'Cool/base.html' %}
+ {% block content %}
+ <style>
+
+
+    
+.btn{
+    border: 0;
+    color: rgb(228, 100, 100);
+    line-height: 15px;
+    outline: none;
+    cursor: pointer;
+    text-align:center;
+    font-weight:500;
+    border-radius:30px;
+    background:none;
+    box-sizing: border-box;
+    font-size:16.8px;
+}
+.r-btn{
+    padding:10px 60px;
+    border: 0;
+    outline: none;
+    background:#86ff3b;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight:500;
+    border-radius:30px;
+}
+
+.btn-n{
+    border: 0;
+    color: #777;
+    line-height: 15px;
+    outline: none;
+    text-align:center;
+    font-weight:500;
+    border-radius:30px;
+    background:none;
+    box-sizing: border-box;
+    font-size:16.8px;
+}
+.contain .pop-up{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%)scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform .4s ,top .4s;
+}
+.pop-up.open-pop-up{
+    position:fixed;
+    visibility: visible;
+    top: 200px;
+   transform: translate(-50%,-50%) scale(1);
+    
+}
+.pop-up img,#close{
+    width: 100px;
+    margin-top: -20px;
+    color:red;
+    font-weight:1000;
+    cursor: pointer;
+    border-radius:50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.pop-up p{
+    margin-top:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+.pop-up button{
+    width: 100%;
+    margin-top:50px;
+    padding: 10px 0;
+    background:#6fd649;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+   
+.contain .pop-up h2 {
+   
+     margin-top: 30px;
+    }
+
+    ul li{
+        list-style:none;
+
+    }
+    ul li a{
+        text-decoration:none;
+        display:inline-block;
+
+    }
+    .hero#blur.active{
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.contain .pop-up h2 {
+    font-size: 20px;
+     top: 10px;
+     margin-top: 30px;
+    }
+
+/*Slider*/
+
+
+.hero{
+    width: 100%;
+    height: 100vh;
+    background: #f6fbff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+h1{
+    font-size: 30px;
+    position: relative;
+    margin-bottom: 80px;
+    align-items: center;
+}
+h1::after{
+    content: "";
+    width: 150px;
+    height: 3px;
+    position: absolute;
+    background: linear-gradient(to right, #7a160f,#d8a7a2,#7a160f);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+.review-box{
+    width: 90%;
+    max-width: 700px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: -10px 10px 40px rgba(0,0,0,.25);
+    position: relative;
+    overflow: hidden;
+}
+.card{
+    height: 500px;
+    padding-left:30px;
+    padding-top:10px;
+    color: #777;
+    line-height: 20px;
+    background-color: #fff;
+    position: relative;
+    box-sizing: border-box;
+}
+.card p{
+    margin-bottom: 10px;
+   
+}
+.profile{
+    display: flex;
+    align-items: center;
+}
+.small{
+    visibility:hidden;
+}
+@media (max-width:650px){
+    .hero h1{
+        font-size: 25px;
+    }
+    .full{
+        display:none;
+    }
+    .small{
+        visibility:visible;
+    }
+    .card p,.btn{
+        font-size: .8em;
+    }
+    .btn{
+        font-size: 1em;
+    }
+}
+@media (max-width:438px){
+    .hero h1{
+        font-size: 23px;
+    }
+    .card,.btn{
+        line-height: 14px;
+    }
+    .full{
+        display:none;
+    }
+    .small{
+        visibility:visible;
+    }
+    .card p{
+        font-size: .7em;
+    }
+    .card h3{
+        line-height: 20px;
+    }
+    .btn{
+    font-size: 1em;
+
+    }
+}
+@media (max-width:340px){
+    .hero h1{
+        font-size: 20px;
+    }
+    .contain .pop-up {
+    width: 239px;
+
+    }.contain .pop-up h2 {
+    font-size: 20px;
+     top: 10px;
+     margin-top: 30px;
+    }
+    .card p,.btn{
+     line-height: 8px;  
+     font-weight: 800; 
+     font-size: .5em;
+    }
+    .full{
+        display:none;
+    }
+    .small{
+        visibility:visible;
+    }
+    .card .profile h3{
+        font-size: 14px;
+    }
+    .profile{
+        margin-bottom: 6px;
+    }
+    .btn, .btn-n{
+        font-size: .8em;
+        line-height:20px;
+        }
+    
+}
+
+
+
+.profile h3{
+    font-size: 20px;
+    color: #f44335;
+    margin-bottom: 8px;
+}
+#slide{
+    width:100%;
+    padding-right: 60px;
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+
+}
+
+.slide-bar{
+    width: 60px;
+    height: 100%;
+    background: #f44336;
+    top: 0;
+    right: 0;
+    color: #fff;
+    padding: 15px 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.slide-bar img{
+    width: 25px;
+    padding: 5px;
+    background:#fff;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+
+/* Tool tip*/
+.tool-tip{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tool-tip ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.tool-tip ul li{
+    position: relative;
+    width: 20px;
+    list-style: none;
+    height: 20px;
+    background: #777;
+    margin: 0 20px;
+    border-radius: 50%;
+    transition: .5s;
+    cursor: pointer;
+}
+.tool-tip ul li:hover{
+    background:#86ff3b;
+    box-shadow: 0 0 0 4px #333,
+                0 0 0 6px #86ff3b;
+}
+
+.tool-tip .content{
+    position: absolute;
+    
+    bottom: 55px;
+    width: 200px;
+    background: #777;
+    color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    transform: translateX(-50%) translateY(-50px);
+}
+.tool-tip ul li:hover .content{
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+}
+.tool-tip ul li .content::before{
+    content: "";
+    position: absolute;
+    background: #777;
+    width: 30px;
+    height: 30px;
+    bottom: -15px;
+    left: 100px;
+    transform: rotate(45deg);
+}
+.tool-tip ul li .content h2{
+    margin: 0;
+    padding: 0;
+}
+
+ </style>
+
+ <div class="hero" id="blur">
+    <h1>Bible Study Groups</h1>
+    <div class="review-box">
+      <div id="slide">
+        {% regroup groups by group_name as bible_study_list %}
+        {% for group_name,data in bible_study_list %}
+        <ul class="card"  id="{{group_name}}">
+                <li class="profile">
+                    <h3><a href="{% url 'Cool:group-detail-view' group_name %}">{{group_name}}<a/></h3>
+                </li>
+
+                   <ul class="inner">
+
+                       {% for member in data %}
+                           <li class="inner-row" >
+                                 {% if member.bs_leader == True %} 
+                                 <button class="btn" id="{{member.group_name}}-{{member.id}}-{{member.name}}"  type="submit"> 
+                                    
+                                 <span class="full">{{forloop.counter}}. 
+
+                                </span><span class='full'>{{member.name}}</span>  <span class="small">{{member.sir_name}}</span>
+                                 </button>{%else%} 
+                                 <button class="btn-n">
+                   
+                                <span class="full">{{forloop.counter}}. 
+
+                               </span>
+                                <a href="{% url 'Cool:member-detail' member.id|add:250 %}"> <span class='full'>{{member.name}}</span><span class="small">{{member.sir_name}}</span></a></span>   {% endif %}</button>
+                           </li>
+                        
+                           <li class="inner-row tool-tip"> {% if forloop.counter == data|length %} 
+                            <br><br><br>
+                            <ul>
+                                <li> <div class="content">
+                                    <h3>Gender-ratio</h3>
+                                    <br>
+                                    <p>{{member.gender_ratio}}</p>
+                                   </div>
+                                </li>
+                                <li>
+                                    <div class="content">
+                                        <h3>Class Ratio</h3>
+                                        <br>
+                                        <p>{{member.class_ratio}}</p>
+                                       </div>
+                                </li>
+                                
+                                <!-- <div class="content">
+                                            <li>
+                                        
+                                            <form action="{% url 'Cool:all-groups' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input name="group-name" value="{{member.group_name}}" style="display:none" readonly>
+                                                <button type="submit" class="r-btn">Reset</button>
+                                            </form>
+                                        </li>
+                                    </div> -->
+                                
+                            </ul>
+                           {% endif  %} </li>
+                     
+                   
+                       {% endfor%}
+                        </br>
+                        </br>
+                       </ul>
+               
+                    </ul>
+               {% endfor %}
+      </div>
+
+      <div class="slide-bar">
+        <img src="../static/menu/close.jpg" id="upArrow" alt="" />
+        <img src="../static/menu/close.jpg" id="downArrow" alt="" />
+      </div>
+  </div>
+  </div>
+ {% comment %} {% regroup groups by group_name as bible_study_list %}
+
+       
+            <ul class="grouping " id="blur">
+
+                
+                
+                {% for group_name,data in bible_study_list %}
+                    <li>
+                    </br>
+                    </br>
+                        <a href="{% url 'Cool:group-detail-view' group_name %}">{{group_name}}<a/>
+                    </li>
+            <ul class="inner">
+                
+                {% for member in data %}
+                    <li class="inner-row" >
+                        {{member.year   }}  {{member.gender}}     {% if member.bs_leader == True %} <button class="open-popup btn" id="{{member.group_name}}-{{member.id}}"  type="submit">Bs Leader</button>{% endif %}
+                    </li>
+                    <li class="inner-row"> {% if forloop.counter == data|length %}<p> {{"Gender-ratio"}}  </p> <p>{{member.gender_ratio}} </p></li>
+                </br>
+                    <li class="inner-row"> <p>{{"class_ratio"}} </p> <p>{{member.class_ratio}}</p>   {% endif%}</li>
+            
+
+                {% endfor%}
+                 </br>
+                 </br>
+
+
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>  {% endcomment %}
+        
+    <div class="contain">
+    <div class="pop-up">
+      <h2>Bible Study Leader</h2>
+    </div>
+</div>
+
+<script>
+    let openPopup = document.querySelectorAll(".pen-popup");
+     let popup = document.querySelector('.pop-up');
+     console.log(popup);
+
+     let form = document.createElement('form');
+     let blur = document.getElementById("blur");
+     for(let i=0;i<openPopup.length;++i){
+
+         openPopup[i].addEventListener("click",()=>{
+             form.method="POST";
+             data=openPopup[i].id.split('-');
+             group_name=data[0];
+             console.log(group_name)
+             form.action="#" + group_name//"{% url 'Cool:groups-groupings' %}"
+             let span = document.createElement('span');
+             span.innerHTML="Cancel";
+             span.id="close"
+          
+             let btn = document.createElement('button');
+             btn.innerHTML="OK";
+             btn.onclick="closePopUp()";
+             let input = document.createElement('input');
+             let p = document.createElement('p');
+             input.type="text";
+             input.name="bs-leader";
+             input.value=openPopup[i].id;
+             p.innerHTML="You are choosing "+openPopup[i].id.split('-')[2]+" for this post !"
+             p.style.cssText="color:blue"
+             input.style.display="none";
+             form.innerHTML="<input type='hidden' name='csrfmiddlewaretoken' value='Wm0q4CTKLcosQlaEGg4c25cgXRRlwT8vMSYcWZV5Wlcn7RdKOMyLf9r8b0VtiWin'>"
+             form.append(span)
+             form.append(input);
+             form.append(btn);
+             popup.append(p);
+             popup.append(form);
+             blur.classList.toggle("active");
+             popup.classList.add("open-pop-up");
+             span.addEventListener('click',()=>{
+                blur.classList.toggle("active");
+                popup.classList.remove('open-pop-up');
+                form.remove();
+                p.remove()
+
+             })
+            });
+     }
+    function closePopUp(){
+        blur.classList.toggle("active");
+        popup.classList.remove('open-pop-up');
+        form.remove();
+
+    }
+</script>
+<!-- Slider Script -->
+
+<script>
+    let slide = document.getElementById("slide");
+    let cards = document.querySelectorAll(".card");
+    let upArrow = document.getElementById("upArrow");
+    let downArrow = document.getElementById("downArrow");
+
+    let y = 0;
+    let factor = 0;
+    factor = factor - 500;
+    upArrow.onclick = () => {
+      y = y - 500;
+      if (cards.length * factor < y) {
+        slide.style.top = y + "px";
+
+        downArrow.style.opacity = "1";
+      } else {
+        upArrow.style.opacity = ".3";
+        downArrow.style.opacity = "1";
+      }
+    };
+    downArrow.onclick = () => {
+      if (y != 0) {
+        y = parseInt(slide.style.top.slice(0, -2)) + 500;
+        slide.style.top = y + "px";
+        downArrow.style.opacity = "1";
+        upArrow.style.opacity = "1";
+      } else {
+        downArrow.style.opacity = ".3";
+      }
+    };
+  </script>
+{% endblock %}
+{% comment %} {% regroup groups by group_name as bible_stuy_list %}
+       
+            <ul>
+
+                
+                
+                {% for group_name,data in bible_study_list %}
+                    <li>
+                        <br>
+                        <br>
+                        <a href="{% url 'Cool:group-detail-view' group_name %}">{{group_name}}<a/>
+                    </li>
+            <ul>
+                
+                {% for member in data %}
+                    <li style="background-color: crimson">
+                        {{member.year   }} :  {{member.gender}} : {{"Gender-ratio"}}  -- {{member.gender_ratio}} :: {{"class_ratio"}} -- {{member.class_ratio}}   :    {% if member.bs_leader == True %}  <button style="color:blue" class="btn-btn-primary">BS-LEADER</button>{% endif %}
+                    </li>
+
+                {% endfor%}
+
+                </ul>
+            </li>
+            {% endfor %}
+        </ul> {% endcomment %}
+
+
+
+

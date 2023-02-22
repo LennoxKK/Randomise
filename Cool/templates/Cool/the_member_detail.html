@@ -1,0 +1,88 @@
+{% extends 'Cool/base.html' %}
+{% block content %}
+<style>
+    .detail{
+        background:linear-gradient(to right, #fff,rgb(50, 4, 4));
+        position:absolute;
+        height:calc(350px);
+        border-radius:10px;
+        width:calc(80%);
+        left: calc(10%);
+        top: calc(20%);
+        display:flex;
+        justify-content:left;
+        align-items:center;
+        
+
+
+    }
+    form{
+        display: flex;
+        align-items:left;
+        position:relative;
+        justify-content: center;
+        left:calc(10%);
+        top: calc(1%);
+        overflow:hidden;
+        font-size: 16px;
+        flex-direction: column;
+    }
+    form p,h3{
+        margin-top: calc(.3%);
+        display: block;
+    }
+    .e-btn{
+        background: transparent;
+        margin-top: calc(.5%);
+        width: calc(20%);
+        border-radius: 10px;
+        height:30px;
+    }
+    .e-btn a{
+        text-decoration: none;
+        display:block;
+        color: #111;
+        font-size: 15px;
+        font-weight: 700;
+
+    }
+    @media (min-width:650px){
+        form p,h3{
+        margin-top: calc(2%);
+    }
+    .e-btn{
+        margin-top: calc(2%);
+    }
+}
+</style>
+<div class="detail">
+    <form>
+        {% csrf_token %}
+        {% if not object %}
+        {{default}} <br>
+        {%else%}
+        <h3> ID {{object.id}}</h3>
+        <p>Name   :  {{object}}</p>
+        <p>{{onject.sir_name}}</p>
+        {% endif%}
+        <p>year_of_study  :  {{object.level}}</p>
+        <p>gender  :  {{object.gender}}</p>
+        {% if  object.leader_status %}
+
+        <p>Status :  Applied to be BS LEADER </p>
+        {% else%}
+        <p> Not Interested to be a BS LEADER </p>
+        {% endif%}
+        <p>Phone   : {{object.phone_number}}</p>
+        
+
+       <button class="e-btn"> <a href="{% url 'Cool:member-update' object.id %}">Edit</a>
+       </button> 
+    </form>
+</div>
+    
+{% endblock %}
+    
+
+
+

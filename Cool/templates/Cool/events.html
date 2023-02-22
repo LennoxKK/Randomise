@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            margin:10px 30px;
+        }
+        .event-form{
+            width:80%;
+            height: 700px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction: column;
+
+        }
+    </style>
+</head>
+<body>
+    <main>
+        {{events}}
+        {% for  i in events %}
+            <h1>event {{i}}</h1>
+            <p>{{j}}</p>
+            <p>{{j}}</p>
+            <p type="date"></p>
+        {% endfor %}
+
+        <form class="event-form" method="post" action="{% url 'Cool:events' %}">
+            {% csrf_token %}
+            <input name="name" placeholder="Name" type="text">
+            <input name="date" placeholder="date" type="date">
+            <input name="time" placeholder="time" type="number">
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+</body>
+</html>

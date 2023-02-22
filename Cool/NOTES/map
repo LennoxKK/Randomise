@@ -1,0 +1,149 @@
+"""
+#forms.py
+
+class Group_Num(forms.Form):
+    num=integerField(initial=6,max_length=)
+
+class MemberForm(forms.ModelForm):
+    class Meta:
+        model=Member
+        fields=[
+            'year_of_study',
+            'gender',
+            'leader'
+        ]
+
+     #   fields="__all__"
+
+#views.py
+
+def group_detail_view():
+
+
+
+
+
+
+def add_to_group(self,*args,**kwargs):
+    form=
+
+
+
+#models.py
+
+GENDER_CHOICES=[
+    ('MALE','FEMALE'),
+]
+class Member(models.Model):
+    year_of_study=models.IntergerField(max_length=4)
+    gender=models.CharField(max_length=4,choices=GENDER_CHOICES)
+    leader_status =models.BooleanField(default=False)
+    def __str__(self):
+        return self.id
+
+
+
+Query from the database
+get_object_or_404(Book,title__startswith='M),pk=1)
+
+def query_data_obj(obj,filter_field,pk):
+    return get_object_or_404(obj,filter_field__startswith='M,pk=1)
+
+def query_data_list(obj,filter_field,pk):
+    return get_object_or_404(obj,published=True)
+
+
+
+
+Model and database for grouping
+        Retrieve the data from database
+            Sort it into groups
+                add the groups into database
+                display a list of the groups
+
+Dealing with the remains
+        Check the ratio of the classes
+
+
+
+
+
+Class Views
+
+# Inherited functions into classes
+#Using the same class for different functions
+# That is for the about view and detail view
+
+
+class CourseView(View):
+    template_name="Cool/about.html"
+    def get(self,request,*args,id=None, **kwargs):
+        context={
+            "default":"Hello"
+        }
+        if id is not None:
+            obj=get_object_or_404(The_member,id=id)
+            context['object']=obj  
+            print(obj)
+        return render(request,self.template_name,context)
+
+
+class CourseObjectMixin(object):
+    model=The_member
+    lookup='id'
+    def get_object(self):
+        id=self.kwargs.get(self.lookup)
+        obj=None
+        if id  is not None:
+            obj=get_object_or_404(self.model,id=id)
+        return obj
+class CourseCreateView(CourseObjectMixin,View):
+    template_name="Cool/the_member_create.html"
+    def get(self,request,*args,id=None, **kwargs):
+        #GET METHOD
+        obj=self.get_object()
+        form=MemberForm(instance=obj)
+        context={"form":form}
+        return render(request,self.template_name,context)
+    def post(self,request,*args,id=None, **kwargs):
+        #POST METHOD
+        obj=self.get_object()
+        form=MemberForm(request.POST,instance=obj)
+        context={"form":form}
+        if form.is_valid():
+            form.save()
+            MemberForm()
+        return render(request ,self.template_name,context)
+    def get_success_url(self):
+        return reverse("The_member:member-detail")
+    
+
+class CourseListView(View):
+    template_name="Cool/the_member_list.html"
+    queryset=The_member.objects.all()
+    def get_queryset(self):
+        return self.queryset
+    
+    def get(self,request,*args,**kwargs):
+        context={"object_list":self.get_queryset()}
+        return render(request,self.template_name,context)
+    
+
+# Class inheritance
+class MyList(CourseListView):
+    queryset= The_member.objects.filter(id=300)
+
+
+groups
+
+#Add bs leaders
+q=0
+for j in d:
+    s=0
+    for  i in bs_leaders: # s=0 q=0, s=1
+        if q==s:
+            d[j].__setitem__("Admin"+str(q),bs_leaders[i])
+            break
+        s+=1
+    q+=1
+"""

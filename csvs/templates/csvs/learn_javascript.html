@@ -1,0 +1,336 @@
+
+ <!DOCTYPE html>
+    <head>
+        <title>JavaScript Tutorial</title>
+<script>     
+
+   // var book = new Object(); //Create an object
+   // book.subject="Perl";
+   // book.author=" Lennox "
+//
+    /* this key word used to refer the object that has been passed to the method */
+
+    function book(title,author){
+        this.title=title;
+        this.author=author;
+
+        //or use of with
+        /*
+            with(this){
+                t=title
+                au=author
+            }
+        */
+    }
+
+      //Animation
+   var imObj=null
+   function init(){
+    imObj=document.getElementById('myImage');
+    imObj.style.postion="relative";
+    imObj.style.left="0px";
+
+
+   }
+   function moveRight(){
+    imObj.style.left = parseInt(imObj.style.left)+"10"+"px";
+   // document.write(imObj.style.left)
+   }
+   window.onload=init;
+
+
+</script>
+    </head>
+    <body >
+
+       <br>
+       <br>
+
+<blink>  Cool     </blink>
+       <br>
+       <br>
+
+       <!--<div onmouseout="out()" onmouseover="over()">This is inside the division</div>-->
+       
+       <!--<input type="button" value="Send" onclick="myFunc()">-->
+       
+       <!--Void operator does not return a value -->
+<!--<a href="javaScript:void(alert('Dont do that!'))">Click</a>-->
+
+<form action="">    
+<img id="myImage" width=100  src="/static/csvs/images/anime.png"  /> 
+<p>Click the button below to move the image to the right</p>
+<input type="button" value="Click Me" onclick="moveRight();" />
+
+</form>
+
+
+
+        <!-- Leaning JavaScript -->
+<script type="text/javascript">// src="java.js">    
+    
+
+   // Hello world 
+   function coolName(){
+    var x=10;
+    while(x>0){
+        document.write(` <form>
+            <input type="text" value="Your name">
+            <input type="submit" value="Send">
+        </form>`);
+        x-=1;
+    }
+
+    for(var i=0;i<6;++i){
+        Loop_one:
+        document.write("Inner_loop"+i+"<br/>")
+
+        for(var j =0;j<3;++j){
+            Loop_two:
+            document.write("Inner_loop"+j+"<br/>")
+        }
+    }
+       
+    for (x in navigator){
+       // alert("Hello")
+      // name = prompt("Your name : ","Your name")
+        document.write(x)
+        document.write("<br/>")
+
+    }
+   }
+   function welcomeHome(){
+    document.write("Hello friend")
+   }
+
+
+   //Onmouseover and onmouseout
+   function over(){
+    document.write("Mouse Over")
+   }
+   function out(){
+    document.write("Mouse Out")
+   }
+
+   //Confirmation dialog box
+   function getConfirmation(){
+
+    var win;
+  /*  for(win in document){
+        document.write(win+"<br/>")
+    }*/
+
+   //name=prompt("What is your name? ", "your name")
+   document.write("hello "+ name)
+   // var retVal = confirm("Do you want to continue?");
+    if(retVal==true){
+        document.write("User wants to continue ");
+        return true
+    }else{
+        document.write("User does not want to continue !");
+        return false;
+    }
+   }
+
+
+
+   //Catch errors
+   function myFunc(){
+    var a =100;
+    var b=0;
+    try{
+        alert("Value for the variable is : "+a);
+        if(b==0){
+            window.onerror=function (msg,url,line){
+                alert("Message : "+msg);
+            }
+            throw("Divide by zero error ");
+        }else{
+            var c=a/b;
+        }
+    }
+    catch(e){
+        
+        alert("Error : "+e.description);
+    }
+    finally{
+        alert("Finally block will always execute ")
+    }
+   }
+
+   //Back track 
+   //Print Hello character by character as you  remove it from the string 
+   //Then backtrack to print the remaining string at each level
+   
+   function display(arr){
+    //The base or termination point 
+    if(arr.length()==0)document.write("Done <br/>")
+    else {
+        document.write(arr[0]+"<br/>")
+        display(arr[1:])
+        //Bactrack to print the remaining elements at each position
+        document.write(arr+"<br/>")
+    }
+   }
+   display("Hello")
+
+
+ 
+   /*
+   Functions frequentlyy used in animations 
+   
+   setTimeout(function,duration)
+        This function calls function after duration milliseconds from now
+    
+    setnterval(function,duration)
+        This function calls function after every duration milliseconds
+
+
+    clearTimeout(setTimeout_variable)
+          This function clears any time set by setTimeout() functions
+   */
+
+
+
+   //Objects
+        /*
+            Functions are different form methods for functions are standalone while methods are declared within an object
+            new operator is used to create an instance of an object
+
+        */
+
+   // document.write("Here is the subject : "+book.subject+"<br/>");
+   // document.write("Here is the author : "+ book.author+"<br/>");
+
+  // var myBook= new book("Perl","Lennox");
+  // document.write("The title is "+myBook.title+"<br/>");
+  // document.write("The author is "+myBook.author +"<br/>")
+
+
+
+
+   /*
+   Bit wise operators  
+   
+   & (Bitwise AND)
+   Perfoms a boolean AND operaton on each bit of its integer arguments
+
+   | (Bitwise OR )
+
+   Perfoms a boolean OR operaton on each bit of its integer arguments
+
+   ^ (Bitwise XOR)
+   Perfoms a boolean exclusive OR operaton on each bit of its integer arguments
+   exclusive OR or mean either but not both
+
+   ~ (Bitwise NOT)
+   Unary operate that reverses all the bits in the operand
+
+   << (Left Shift)
+   Moves all the bits in  the first operand to the left by the number of the places specified in the second operand
+   New bits are filled with zeros. Shifting a value left by one position is like multiplying  by 2, 
+   shifting two positions is like multiplying by 4
+
+
+   >> (Right Shift)
+   left values shifted to the Right
+
+   >>> (Right shift with zero)
+   Just like >> operator and only that the bits shifted in on the left are always zeros.
+
+
+
+   Miscellaneous operators :
+        Conditional and typeof operators
+
+        Conditional Operator :
+                ?:
+
+                z = (x>y)? 100:200;
+
+        typeof Operator:
+                unary operator that can be placed before its single operand,which can be of any type:
+                Its value is a string indicating the data type of the operand
+
+                z = (typeof x=="String " ? "X is a string " : "X is not a string") 
+
+    Switch case statements
+
+            grade = "A"
+
+            Switch(grade){
+                case "A": document.write("You got it bro ");
+                break;
+                case "B": document.write("You are about to get  it bro ");
+                break;
+                case "C": document.write("You are close to it bro ");
+                break;
+                case "D": document.write("You missed it bro ");
+                break;
+                default : document.write(" Unknown Grade 1");
+            }
+
+            for-in loop
+
+            for( variable in object){
+                do something
+            }
+
+
+    Events :
+    Are part of the Document Object Model
+            
+            onsubmit event:
+
+                Validation an be used during this event
+            
+                Onmouseover
+                    Trigers when you bring your mouse over an element and the onmouseout when you 
+                    move your mouse out of an element
+
+    Dialog boxes :
+            alert
+            confirm
+            prompt
+    
+    Print a page with window.printt()
+
+    OOP 
+    Encapsulatiion :
+            the capability to store related information either data or methods, together in one object
+
+    Aggregation :
+            Store one object inside another object
+    
+    Inheritance :
+            class rely on another class for some of its properties and methods
+
+    Polymorphism:
+            
+            capability of writing one function or method that works in variety of different ways
+
+    Catching errors
+
+    try{
+        Code run
+        [break;]
+    }
+    catch(e){
+        Code to run if an exception occurs
+        [break;]
+    }
+    [finally {
+        Code is always executed regardless of an exception occuring
+
+    }]
+   
+    
+   */
+
+
+   
+
+       </script>
+
+    </body>
+    </html>

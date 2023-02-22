@@ -1,0 +1,239 @@
+"""
+class Article(models.Model):
+    headline=models.CharField(max_length=200)
+    #This is used to determine the property chosen to describe the class
+    def __str__(self):
+        return self.headline
+
+Make a new change without deleting the database
+MAKE MIGRATIONS AND MIGRATE 
+    If you add a new field you need to set 
+        (
+            null=True
+            default = prefered value
+        )
+
+    Blank and null
+        (
+            blank=True  ------ The field is required
+            null = True ----- The field can be like that without a null value
+        )
+
+
+    Views 
+
+        def home_view(request,*args,  **kwargs):
+            print(request.user)   ---Gives the current user
+            #code
+            return HttpResponse("Hello)
+         def home_view(request,*args,  **kwargs):
+            print(request.user)   ---Gives the current user
+            #code
+            return render(request,template_name,context)
+
+        
+        Inheritance in HTML
+            {% block content %}
+               
+            {%endblock %}
+
+          
+           {% block content_another_block_area %}
+           {% endblock %}
+
+
+           {% block content_main %}
+           {% endblock %}
+
+
+        include 
+
+        {% include 'navbar.html' %}
+        Reduce redundancy of code
+
+
+    
+    Addition in html tag
+
+    {% for i in numbers %}
+         <li>i|add:32</li>
+    {% endfor %}
+
+
+
+    Filters in templating
+
+    {{my_context|capfirst|safe|slugify|striptags }}
+
+    Can make template within the main app folder
+
+
+    Forms
+
+    class ProductForm(forms.ModelForm):
+         description = form.CharField( widget=forms.Textarea(
+        attrs={
+            'class':'new-class-name two',
+            'rows':20,
+            'cols':120
+        }
+    ))
+        This overites the description down there
+        class Meta:
+            model=Product
+            fields= [ 
+                'title',
+                'description',
+                'price'
+            ]
+
+    from .forms impoer ProductForm
+
+    def product_details_view(request,*args,**kwargs):
+        form=ProductForm(request.POST or None)
+        if form.is_valid():
+            form.save() 
+            #or for a raw form that is form.Form and not forms.ModelForm
+            Product.objects.create(**my_fom.cleaned_data)
+
+            #To clear the form after saving 
+            form=ProductForm()
+
+    html
+
+    <form>
+    {% crsf_token %}
+    {{form.as_p}}
+        </form>
+
+
+    Form Widgets
+
+    Overiding the default widgets
+
+    description = form.CharField( widget=forms.Textarea(
+        attrs={
+            'class':'new-class-name two',
+            'rows':20,
+            'cols':120
+        }
+    ))
+
+
+Handling a missing object from a dynamic url
+
+    from django.shortcuts import get_object_or_404
+
+    def product_details_view(request,*args,**kwargs):
+       obj=get_object_or_404(Product,id=id)
+
+
+Delete object from the database
+
+Confirm delete
+if request.method=="POST:
+    obj.delete()
+
+
+Querryset
+
+queryset=Product.objects.all()
+context={
+    "object_list":queryset,
+}
+
+
+Grab  the url in django models
+
+class Product (models.Model):
+
+    def get_absolute_url(self):
+        return f"/products/{self.id}"
+
+    #Also we can do the same using the name given to a url
+     def get_absolute_url(self):
+        return reverse("name_of_url",,kwargs={"id:self.id}) 
+
+
+#  reverse in a view
+
+    def my_view(self):
+        return redirect("some-view-name",foo='bar') 
+
+#passing an object in the redirect shortcut
+    def my_view(self):
+        obj=MyObject.objects.get('...')
+        return redirect(obj) 
+
+
+
+
+Class-Based Views
+
+        views.py
+
+
+            from django.views.generic import TemplateView
+
+            class AboutView(TemplateView):
+                template_name='hello.html'
+                model=Article
+                
+
+                def get_context_data(self,**kwargs):
+                    #Call the base implementation first to get a context
+                    context=super().get_context_data(**kwargs)
+                    #Add another queryset
+                    context['hello']="Hello world"
+                    return context
+                    
+
+
+
+
+
+        urls.py
+            from django.urls import path
+            from some_app.views import AboutView
+
+            urlpatterns=[
+                path('about/', AboutView.as_view()),
+            ]  
+
+
+        
+
+html will be
+-----------href={{instance.get_absolute_url}}
+
+
+Searches
+    1. Django tempales engine
+
+
+
+
+
+HTTP REQUEST , POST, GET METHODS
+
+QueryDict Objects :
+
+        request.POST
+        request.GET
+
+        By default these two dictioneries are immutable so you should make them immutable by
+        adding  the code below:
+
+            QueryDict.__init__(immutable=True)
+
+            same as:
+
+            request.POST.__init__(immutable=True)
+
+            Returns a list of data with  the requested key
+
+            QueryDict.getlist(key, default = None)
+
+
+
+"""

@@ -1,0 +1,28 @@
+{% extends 'Cool/base.html' %}
+    {% block content %}
+    <style>
+        ul li{
+            list-style:none;
+        }
+        ul li a{
+            padding-top:10px;
+            display:block;
+            text-decoration:none;
+        }
+        ul li a span{
+            padding-right:10px;
+        }
+
+    </style>
+
+  
+            <ul>
+                {% for instance in object_list %}
+                    <li><a href='{{instance.get_absolute_url}}'><span>{{forloop.counter}}.</span>   {{instance}}</a></li>
+                {% endfor%}
+            </ul>
+
+    {% endblock %}
+        
+
+
